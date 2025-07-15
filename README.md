@@ -1,8 +1,7 @@
-# BlockChain
-
 # Blockchain-Based Encrypted File Storage System
 
-This project is a decentralized file storage system that uses blockchain principles to provide secure, tamper-proof file management. It supports file uploads with AES encryption, RSA key protection, and records each transaction on a custom-built blockchain. The goal was to create a lightweight, serverless solution that ensures confidentiality, integrity, and controlled access to files.
+This project is a decentralized file storage system that uses blockchain principles to provide secure, tamper-proof file management. 
+It supports file uploads with AES encryption, RSA key protection, and records each transaction on a custom-built blockchain. The goal was to create a lightweight, serverless solution that ensures confidentiality, integrity, and controlled access to files.
 
 ## Features
 
