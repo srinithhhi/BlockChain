@@ -1,0 +1,154 @@
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    .title {
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .title-text {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 4rem;
+        color: #00d4ff;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle-text {
+        font-size: 2rem;
+        color: #ff00d4;
+    }
+
+    .hr {
+        border: 1px solid #8d7f7f;
+        width: 55rem;
+        margin: 2rem auto;
+    }
+
+    .container-fluid {
+        margin-top: 2rem;
+    }
+
+    /* Forms and input styling */
+    .form-group input, .form-group textarea {
+        font-size: 1.2rem;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+        border-color: #00d4ff;
+        outline: none;
+    }
+
+    .btn {
+        background-color: #ff0072;
+        color: white;
+        font-size: 1.2rem;
+        padding: 12px 20px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        width: 100%;
+	text-transform:uppercase;
+    }
+
+    .btn:hover {
+        background-color: #ff4a92;
+        transform: scale(1.05);
+    }
+
+    /* Post box styles */
+    .post_box {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        color: #ddd;
+    }
+
+    .post_box-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .post_box-avatar {
+        background-color: #ff0072;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.6rem;
+        margin-right: 15px;
+    }
+
+    .post_box-body {
+        margin-top: 10px;
+    }
+
+    .post_box a {
+        color: #00d4ff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .post_box a:hover {
+        color: #ff00d4;
+    }
+
+    /* Gradient heading style */
+    h2.alert-primary {
+        background: linear-gradient(90deg, #00d4ff, #ff00d4);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Upload File Section -->
+        <div class="col-md-4">
+            <h2 class="alert alert-primary">Upload a File</h2>
+            <form action="/submit" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>User Name:</label>
+                    <input type="text" class="form-control" name="user" placeholder="Enter Your Name" />
+                </div>
+
+                <div class="form-group">
+                    <label>Upload a File:</label>
+                    <input type="file" id="fileUpld" name="v_file" accept=".*" />
+                </div>
+
+                <button type="submit" class="btn">Upload</button>
+            </form>
+        </div>
+
+        <!-- Uploaded Files Section -->
+        <div class="col-md-8">
+            <h2 class="alert alert-primary">Uploaded Files</h2>
+            {% for post in request_tx %}
+                <div class="post_box">
+                    <div class="post_box-header">
+                        <div class="post_box-avatar">{{post.user[0]}}</div>
+                        <div>{{post.user}}</div>
+                    </div>
+                    <div class="post_box-body">
+                        {{post.v_file}} → <a href="{{url_for('download_file', variable=post.v_file)}}">Download</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
